@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Basic Calculator | Harsh</title>
+<style>
+*{box-sizing:border-box}body{margin:0;min-height:100vh;font-family:Arial,sans-serif;background:linear-gradient(135deg,#151d50,#126c91);display:grid;place-items:center;padding:24px;color:#172033}
+.wrap{width:min(960px,100%);display:grid;grid-template-columns:1fr 1fr;gap:28px;align-items:center}
+.intro{color:white}.tag{display:inline-block;background:#ffd34e;color:#172033;padding:8px 13px;border-radius:20px;font-weight:bold;font-size:12px;letter-spacing:1px}
+h1{font-size:clamp(36px,6vw,62px);line-height:.98;margin:18px 0}.intro p{color:#d7e8f5;line-height:1.7}.chips{display:flex;gap:8px;flex-wrap:wrap}.chips span{background:#ffffff20;border:1px solid #ffffff45;padding:9px 12px;border-radius:12px;color:white}
+.calc{background:#f8f9ff;border:8px solid #172c69;border-radius:28px;padding:20px;box-shadow:15px 18px 0 #08163b80}
+.screen{background:#a9e7c1;border:4px solid #243a64;border-radius:12px;padding:18px;text-align:right;font-size:36px;min-height:82px;overflow:hidden;margin-bottom:16px}
+.keys{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}.keys button{border:3px solid #263a66;border-radius:10px;padding:16px 4px;font-size:22px;font-weight:bold;background:#e8efff;cursor:pointer;box-shadow:0 4px 0 #b5c4e0}.keys button:active{transform:translateY(3px);box-shadow:none}.keys .op{background:#ffbd45}.keys .clear{background:#ff7197}.keys .equal{background:#55d49b;grid-column:span 2}.keys .zero{grid-column:span 2}
+.note{text-align:center;color:#62708d;font-size:12px;margin:14px 0 0}
+@media(max-width:700px){.wrap{grid-template-columns:1fr;max-width:440px}.intro{text-align:center}.chips{justify-content:center}}
+</style></head>
+<body><main class="wrap"><section class="intro"><span class="tag">TASK 01 · C++ PROJECT</span><h1>Basic<br>Calculator.</h1><p>A clean, colourful calculator concept for addition, subtraction, multiplication and division. The matching C++ source code is included in this repository.</p><div class="chips"><span>＋ Addition</span><span>− Subtraction</span><span>× Multiply</span><span>÷ Divide</span></div></section>
+<section class="calc" aria-label="Calculator"><div class="screen" id="display">0</div><div class="keys">
+<button onclick="clearAll()" class="clear">AC</button><button onclick="del()">⌫</button><button onclick="append('%')">%</button><button class="op" onclick="append('/')">÷</button>
+<button onclick="append('7')">7</button><button onclick="append('8')">8</button><button onclick="append('9')">9</button><button class="op" onclick="append('*')">×</button>
+<button onclick="append('4')">4</button><button onclick="append('5')">5</button><button onclick="append('6')">6</button><button class="op" onclick="append('-')">−</button>
+<button onclick="append('1')">1</button><button onclick="append('2')">2</button><button onclick="append('3')">3</button><button class="op" onclick="append('+')">+</button>
+<button class="zero" onclick="append('0')">0</button><button onclick="append('.')">.</button><button class="equal" onclick="calculate()">=</button>
+</div><p class="note">Interactive web preview · C++ source in main.cpp</p></section></main>
+<script>
+const d=document.getElementById('display');let expr='';
+function render(){d.textContent=expr||'0'}
+function append(v){if(expr.length<28)expr+=v;render()}
+function clearAll(){expr='';render()}
+function del(){expr=expr.slice(0,-1);render()}
+function calculate(){try{if(!/^[0-9+\-*/%.() ]+$/.test(expr))throw Error();let result=Function('"use strict";return ('+expr+')')();if(!Number.isFinite(result))throw Error();expr=String(Number(result.toFixed(8)));render()}catch(e){d.textContent='Error';expr=''}}
+</script></body></html>
